@@ -1,21 +1,35 @@
 var formEl = document.querySelector("#form");
 var cityInputEl = document.querySelector("#search-city");
-var weatherInfoEl = document.querySelector("#current-weather");
+var currentWeatherEl = document.querySelector("#current-weather");
+
 var today = new Date();
 var date = (today.getMonth()+1) + "/" + today.getDate() + "/" + today.getFullYear();
-
-var forcastWeatherData = function() {
-
-};
+var unixTime = Math.floor(Date.now() / 1000);
+var timeArray = [
+    (unixTime - 86400),
+    (unixTime - 172800),
+    (unixTime - 259200),
+    (unixTime - 345600),
+    (unixTime - 432000)
+];    
+console.log(timeArray);
+// console.log(timeArray[0],timeArray[1],timeArray[2],timeArray[3],timeArray[4],);
 
 var displayCurrentWeatherData = function(weatherData) {
 
 
 };
 
+var forecastWeatherData = function(weatherData) {
+
+
+
+    console.log(weatherData)
+};
+
 var currentWeatherData = function(weatherData) {
     var currentIcon = weatherData.current.weather[0].icon;
-    weatherInfoEl.textContent = "";    
+    currentWeatherEl.textContent = "";    
 
     var weatherDataEl = document.createElement("div");
     weatherDataEl.classList = "weather-data-div";
@@ -56,14 +70,14 @@ var currentWeatherData = function(weatherData) {
     cityUvIndex.classList = "current-weather-info";
     weatherDataEl.appendChild(cityUvIndex);
 
-    weatherInfoEl.classList.add("current-weather-border");
-    weatherInfoEl.appendChild(weatherDataEl);
-    console.log(weatherData);
+    currentWeatherEl.classList.add("current-weather-border");
+    currentWeatherEl.appendChild(weatherDataEl);
+    // console.log(weatherData);
 };
 
 var getAllWeatherData = function(lat, lon) {
-    var apiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude={part}&units=imperial&appid=0edbb4eebb59bb25285ea86cab81a271"
-    fetch(apiUrl).then(function(response) {
+    var apiUrlCurrent = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude={part}&units=imperial&appid=0edbb4eebb59bb25285ea86cab81a271"
+    fetch(apiUrlCurrent).then(function(response) {
         if (response.ok) {
             response.json().then(function(data) {
                 currentWeatherData(data);
@@ -72,6 +86,31 @@ var getAllWeatherData = function(lat, lon) {
             alert("Something went wrong. Try again.")
         }
     });
+
+    for (i = 0; i < timeArray.length; i++) {
+        var apiUrlForecast = "https://api.openweathermap.org/data/2.5/onecall/timemachine?lat=" + lat + "&lon=" + lon + "&dt=" + timeArray[i] + "&units=imperial&appid=0edbb4eebb59bb25285ea86cab81a271"
+
+        fetch(apiUrlForecast).then(function(response) {
+            if (response.ok) {
+                response.json().then(function(data) {
+                    forecastWeatherData(data);
+                })
+            } else {
+                alert("Something went wrong. Try again")
+            }
+        });
+    };
+
+    // fetch(apiUrlForecast).then(function(response) {
+    //     console.log(response);
+    //     if (response.ok) {
+    //         response.json().then(function(data) {
+    //             forecastWeatherData(data);
+    //         })
+    //     } else {
+    //         alert("Something went wrong. Try again")
+    //     }
+    // });
 };
 
 var getCityGeo = function(city) {

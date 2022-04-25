@@ -15,19 +15,29 @@
     </header>
     <main>
         <section id="main-container" class="main-container">
-            <div id="search-container" class="search-container">
-                <form id="form">
-                    <label for="search-city"><h1 class="section-title">Search for a City:</h1></label>
-                    <input id="search-city" class="input" name="search-city" type="text" placeholder="Orem">
-                    <button type="submit" class="btn">Search</button>
-                </form>
-            </div>
-            <div id="current-weather" class="current-weather">
+            <section id="all-search" class="all-search">
+                <div id="search-form" class="search-form">
+                    <form id="form">
+                        <label for="search-city"><h1 class="section-title">Search for a City:</h1></label>
+                        <input id="search-city" class="input" name="search-city" type="text" placeholder="Orem">
+                        <button type="submit" class="btn">Search</button>
+                    </form>
+                </div>
 
-            </div>
-            <div id="5d-weather" class="5d-weather">
+                <div class="search-history">
+                    <form>
+                        <button>test</button>
+                    </form>
+                </div>
+            </section> 
+            <section id="all-weather" class="all-weather">
+                <div id="current-weather" class="current-weather">
 
-            </div>
+                </div>
+                <div id="forecast-weather" class="forecast-weather">
+
+                </div>
+            </section>
         </section>
     </main>
     <script src="./assets/js/script.js"></script>
