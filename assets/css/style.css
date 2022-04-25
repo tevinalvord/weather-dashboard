@@ -28,21 +28,30 @@ body {
 
 .main-container {
     display:flex;
-    margin: 0px 10%;
+    justify-content: flex-end;
+    flex-wrap: wrap;
 }
 
-.all-search {
-    width: 30%;
+.form-div {
+    margin: 10px 0px;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
 }
 
-.search-form {
+.form {
+    width: 50%;
+    flex-grow: 1;
+}
+
+.search-history {
     margin: 10px 0px;
     display: flex;
     justify-content: flex-end;
 }
 
-.search-history {
-
+.search-history-border {
+    border-top: 2px solid #6f6f6f;
 }
 
 .search-title {
@@ -70,7 +79,7 @@ body {
     border: 1px solid black;
     outline: none;
     font-size: 1rem;
-    min-width: 285px;
+    width: 95%;
 }
 
 .input:focus {
@@ -86,11 +95,27 @@ body {
     border-style: none;
     border-radius: 4px;
     display: block;
-    min-width: 300px;
+    width: 100%;
     transition: background-color 300ms ease-in-out;
     box-shadow: 0px 3px grey;
     top: -3px;
     position: relative;
+    cursor: pointer;
+}
+
+.history-btn {
+    background-color: #b7b7b7;
+    color: #373737;
+    padding: 10px 0px 6px 0px;
+    margin: 14px 0px;
+    border-style: none;
+    border-radius: 4px;
+    display: block;
+    width: 100%;
+    transition: background-color 300ms ease-in-out;
+    position: relative;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 .btn:hover {
@@ -104,7 +129,8 @@ body {
 }
 
 .all-weather {
-    width: 70%;
+    width: 60%;
+    margin-right: 10%;
 }
 
 .current-weather {
@@ -113,10 +139,9 @@ body {
     padding: 10px 10px 10px 6px;
 }
 
-/* .weather-data-div {
-    display: flex;
-    flex-direction: column;
-} */
+.weather-data-div {
+    position: relative;
+}
 
 .current-weather-border {
     border: 1px solid black;
@@ -179,4 +204,38 @@ body {
     margin-bottom: 16px;
     font-weight: 500;
     padding: 2px 6px;
+}
+
+@media screen and (max-width: 980px) {
+    .main-container {
+        justify-content: center;
+    }
+
+    .all-search {
+        width: 50%;
+    }
+
+    .all-weather {
+        width: 90%;
+        margin: 0px;
+    }
+
+    .form-div {
+        justify-content: center;
+        margin: 10px 0px 0px 0px;
+    }
+
+    .search-history {
+        justify-content: center;
+    }
+
+    .input {
+        width: 98%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .all-search {
+        width: 60%;
+    }
 }
