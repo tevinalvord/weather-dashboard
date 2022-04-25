@@ -1,6 +1,6 @@
 var searchFormEl = document.querySelector("#search-form");
-var historyFormEl = document.querySelector("#history-form")
-var searchHistoryEl = document.querySelector("#search-history")
+var historyFormEl = document.querySelector("#history-form");
+var searchHistoryEl = document.querySelector("#search-history");
 var cityInputEl = document.querySelector("#search-city");
 var currentWeatherEl = document.querySelector("#current-weather");
 var forecastWeatherEl = document.querySelector("#forecast-weather");
@@ -13,7 +13,7 @@ var forecastDates = [
     (today.getMonth()+1) + "/" + (today.getDate()-2) + "/" + today.getFullYear(),
     (today.getMonth()+1) + "/" + (today.getDate()-3) + "/" + today.getFullYear(),
     (today.getMonth()+1) + "/" + (today.getDate()-4) + "/" + today.getFullYear(),
-    (today.getMonth()+1) + "/" + (today.getDate()-5) + "/" + today.getFullYear()
+    (today.getMonth()+1) + "/" + (today.getDate()-5) + "/" + today.getFullYear(),
 ];
 var unixTime = Math.floor(Date.now() / 1000);
 var timeArray = [
@@ -21,7 +21,7 @@ var timeArray = [
     (unixTime - 172800),
     (unixTime - 259200),
     (unixTime - 345600),
-    (unixTime - 432000)
+    (unixTime - 432000),
 ];    
 
 var fiveDayForecast = function() {
@@ -79,7 +79,6 @@ var currentWeatherData = function(weatherData, city) {
     currentWeatherDataEl.classList = "weather-data-div";
 
     var cityNameEl = document.createElement("h1");
-    // var cityName = cityInputEl.value;
     var cityName = city;
     cityInputEl.value = "";
 
@@ -184,6 +183,24 @@ var getCityGeo = function(city) {
 var cityHistory = function(city) {
     searchHistoryEl.classList.add("search-history-border");
 
+    // if ("button[button, provo]") {
+    //     console.log("do nothing")
+    // } else {
+    //     var historyBtn = document.createElement("button")
+
+    //     var arr = city.split(" ")
+    //     for (i = 0; i < arr.length; i++) {
+    //         arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1);
+    //     };
+    //     var cityNameCap = arr.join(" ");
+    //     historyBtn.textContent = cityNameCap;
+    //     historyBtn.classList = "history-btn";
+    //     historyBtn.setAttribute("button", city)
+    //     historyBtn.id = "history-btn";
+    
+    //     historyFormEl.appendChild(historyBtn);
+    // }
+
     var historyBtn = document.createElement("button")
 
     var arr = city.split(" ")
@@ -193,11 +210,11 @@ var cityHistory = function(city) {
     var cityNameCap = arr.join(" ");
     historyBtn.textContent = cityNameCap;
     historyBtn.classList = "history-btn";
-    historyBtn.setAttribute("button", "btn")
+    historyBtn.setAttribute("button", city)
     historyBtn.id = "history-btn";
 
     historyFormEl.appendChild(historyBtn);
-}
+};
 
 var historySearch = function(event) {
     event.preventDefault();

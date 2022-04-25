@@ -68,8 +68,8 @@ body {
 .current-icon {
     width: auto;
     height:50px;
-    position: fixed;
-    top: 74px;
+    position: absolute;
+    top: -7px;
 }
 
 .input {
@@ -131,6 +131,10 @@ body {
 .all-weather {
     width: 60%;
     margin-right: 10%;
+}
+
+.all-search {
+    width: 270px;
 }
 
 .current-weather {
