@@ -2,6 +2,7 @@ var formEl = document.querySelector("#form");
 var cityInputEl = document.querySelector("#search-city");
 var currentWeatherEl = document.querySelector("#current-weather");
 var forecastWeatherEl = document.querySelector("#forecast-weather");
+var index = 0;
 
 var today = new Date();
 var date = (today.getMonth()+1) + "/" + today.getDate() + "/" + today.getFullYear();
@@ -30,16 +31,19 @@ var fiveDayForecast = function() {
     forecastWeatherEl.appendChild(forecastTitleEl);
 };
 
-var forecastWeatherData = function(weatherData, forecastWeatherDataDiv, forecastDate) {
+var forecastWeatherData = function(weatherData, forecastWeatherDataDiv) {
     var currentIcon = weatherData.current.weather[0].icon;
 
     var forecastWeatherDataEl = document.createElement("div");
     forecastWeatherDataEl.classList = "forecast-data-div";
 
+    console.log(index)
     var forecastWeatherDate = document.createElement("p");
-    forecastWeatherDate.textContent = forecastDate;
+    forecastWeatherDate.textContent = forecastDates[index];
     forecastWeatherDate.classList = "forecast-date";
     forecastWeatherDataEl.appendChild(forecastWeatherDate);
+    index++;
+
 
     var currentIconEl = document.createElement("img");
     currentIconEl.classList = "forecast-icon";
@@ -148,12 +152,13 @@ var getAllWeatherData = function(lat, lon) {
             if (response.ok) {
                 response.json().then(function(data) {
 
-                    forecastWeatherData(data, forecastWeatherDataDiv, forecastDate);
+                    forecastWeatherData(data, forecastWeatherDataDiv);
                 })
             } else {
                 alert("Something went wrong. Try again")
             }
         });
+        index = 0;
     };
 };
 
