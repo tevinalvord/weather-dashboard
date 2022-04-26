@@ -4,6 +4,8 @@ var searchHistoryEl = document.querySelector("#search-history");
 var cityInputEl = document.querySelector("#search-city");
 var currentWeatherEl = document.querySelector("#current-weather");
 var forecastWeatherEl = document.querySelector("#forecast-weather");
+var allSearchEl = document.querySelector("#all-search");
+var deleteBtnEl = document.querySelector("#delete-btn-div");
 var index = 0;
 var cityArr = [];
 
@@ -189,6 +191,26 @@ var getCityGeo = function(city) {
     });
 };
 
+var createDeleteBtn = function() {
+    var deleteHistoryBtn = document.createElement("button");
+    deleteHistoryBtn.textContent = "Clear search history"
+    deleteHistoryBtn.id = "delete-btn";
+    deleteHistoryBtn.classList = "delete-btn";
+    deleteHistoryBtn.setAttribute("deletebtn", "delete-Btn")
+    deleteBtnEl.appendChild(deleteHistoryBtn);
+};
+
+var deleteBtn = function(event) {
+    event.preventDefault();
+
+    var buttonClicked = event.target.getAttribute("deleteBtn");
+
+    if (buttonClicked) {
+        localStorage.clear();
+        location.reload();
+    }
+};
+
 var loadCityHistory = function() {
     cityArr = localStorage.getItem("cityArr");
     if (cityArr === null) {
@@ -216,7 +238,7 @@ var loadCityHistory = function() {
     
         historyFormEl.appendChild(historyBtn);
     };
-
+    createDeleteBtn();
 };
 
 var saveCityHistory = function() {
@@ -239,6 +261,12 @@ var cityHistory = function(city) {
     historyBtn.id = "history-btn";
 
     historyFormEl.appendChild(historyBtn);
+
+    // var deleteHistoryBtn = document.createElement("button");
+    // deleteHistoryBtn.textContent = "Clear search history"
+    // deleteHistoryBtn.classList = "delete-btn";
+    // allSearchEl.appendChild(deleteHistoryBtn);
+
 
     var city2 = city.toLowerCase();
     cityArr.push(city2);
@@ -271,6 +299,11 @@ var searchFormHandler = function(event) {
 
     if (city) {
         forecastWeatherEl.innerHTML = "";
+
+        if (cityArr.length === 0) {
+            createDeleteBtn();
+        }
+
         getCityGeo(city);
         addToCityArr(city);
     } else {
@@ -282,3 +315,4 @@ loadCityHistory();
 
 searchFormEl.addEventListener("submit", searchFormHandler);
 historyFormEl.addEventListener("click", historySearch);
+deleteBtnEl.addEventListener("click", deleteBtn);
