@@ -125,6 +125,12 @@ var currentWeatherData = function(weatherData, city) {
     currentWeatherEl.appendChild(currentWeatherDataEl);
 };
 
+var test =  function(weatherInfo) {
+    return `
+        <div>${weatherInfo.temp}
+        </div>`;
+}
+
 var getAllWeatherData = function(lat, lon, city) {
     var apiUrlCurrent = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude={part}&units=imperial&appid=3bc1242a5c5f806c1f576e32c339b00b";
     
