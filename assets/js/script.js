@@ -83,6 +83,7 @@ var forecastWeatherData = function(weatherData) {
 };
 
 var currentWeatherData = function(weatherData, city) {
+    console.log(weatherData)
     var currentIcon = weatherData.current.weather[0].icon;
     currentWeatherEl.textContent = "";
 
@@ -173,7 +174,7 @@ var getAllWeatherData = function(lat, lon, city) {
 };
 
 var getCityGeo = function(city) {
-    var apiUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + ",us&limit=&appid=3bc1242a5c5f806c1f576e32c339b00b";
+    var apiUrl = "https://api.openweathermap.org/geo/1.0/direct?q=" + city + ",us&limit=&appid=3bc1242a5c5f806c1f576e32c339b00b";
 
     fetch(apiUrl).then(function(response) {
         if (response.ok) {
