@@ -10,19 +10,19 @@ var cityArr = [];
 var today = new Date();
 var date = (today.getMonth()+1) + "/" + today.getDate() + "/" + today.getFullYear();
 var forecastDates = [
-    (today.getMonth()+1) + "/" + (today.getDate()-1) + "/" + today.getFullYear(),
-    (today.getMonth()+1) + "/" + (today.getDate()-2) + "/" + today.getFullYear(),
-    (today.getMonth()+1) + "/" + (today.getDate()-3) + "/" + today.getFullYear(),
-    (today.getMonth()+1) + "/" + (today.getDate()-4) + "/" + today.getFullYear(),
-    (today.getMonth()+1) + "/" + (today.getDate()-5) + "/" + today.getFullYear(),
+    (today.getMonth()+1) + "/" + (today.getDate()+1) + "/" + today.getFullYear(),
+    (today.getMonth()+1) + "/" + (today.getDate()+2) + "/" + today.getFullYear(),
+    (today.getMonth()+1) + "/" + (today.getDate()+3) + "/" + today.getFullYear(),
+    (today.getMonth()+1) + "/" + (today.getDate()+4) + "/" + today.getFullYear(),
+    (today.getMonth()+1) + "/" + (today.getDate()+5) + "/" + today.getFullYear(),
 ];
 var unixTime = Math.floor(Date.now() / 1000);
 var timeArray = [
-    (unixTime - 86400),
-    (unixTime - 172800),
-    (unixTime - 259200),
-    (unixTime - 345600),
-    (unixTime - 432000),
+    (unixTime + 86400),
+    (unixTime + 172800),
+    (unixTime + 259200),
+    (unixTime + 345600),
+    (unixTime + 432000),
 ];    
 
 var fiveDayForecast = function() {
@@ -237,7 +237,8 @@ var cityHistory = function(city) {
 
     historyFormEl.appendChild(historyBtn);
 
-    cityArr.push(city);
+    var city2 = city.toLowerCase();
+    cityArr.push(city2);
     saveCityHistory();
 };
 
@@ -263,7 +264,7 @@ var addToCityArr = function(city) {
 var searchFormHandler = function(event) {
     event.preventDefault();
 
-    var city = cityInputEl.value.trim();
+    var city = cityInputEl.value.toLowerCase().trim();
 
     if (city) {
         forecastWeatherEl.innerHTML = "";
