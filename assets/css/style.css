@@ -74,7 +74,11 @@ body {
     width: auto;
     height:50px;
     position: absolute;
-    top: -7px;
+    top: -8px;
+}
+
+.unordered-list {
+    list-style: none;
 }
 
 .input {

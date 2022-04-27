@@ -89,6 +89,8 @@ var getAllWeatherData = function(lat, lon, city) {
             response.json().then(function(data) {
                 currentWeatherData(data, city);
                 forecastWeatherData(data)
+                mainContainerEl.classList.add("flex-end-main");
+                allWeatherEl.classList.add("show-all-weather")
             })
         } else {
             alert("Something went wrong. Try again.")
@@ -192,9 +194,6 @@ var cityHistory = function(city) {
 var historySearch = function(event) {
     event.preventDefault();
 
-    mainContainerEl.classList.add("flex-end-main");
-    allWeatherEl.classList.add("show-all-weather")
-
     var buttonClicked = event.target.getAttribute("button")
 
     if (buttonClicked) {
@@ -219,9 +218,6 @@ var searchFormHandler = function(event) {
         if (cityArr.length === 0) {
             createDeleteBtn();
         }
-        
-        mainContainerEl.classList.add("flex-end-main");
-        allWeatherEl.classList.add("show-all-weather")
         getCityGeo(city);
         addToCityArr(city);
     } else {
