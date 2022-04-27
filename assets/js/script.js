@@ -3,14 +3,10 @@ var historyFormEl = document.querySelector("#history-form");
 var searchHistoryEl = document.querySelector("#search-history");
 var cityInputEl = document.querySelector("#search-city");
 var currentWeatherEl = document.querySelector("#current-weather");
-var forecastWeatherEl = document.querySelector("#forecast-weather");
-var allSearchEl = document.querySelector("#all-search");
 var allWeatherEl = document.querySelector("#all-weather");
 var deleteBtnEl = document.querySelector("#delete-btn-div");
 var mainContainerEl = document.querySelector("#main-container");
-var index = 0;
 var cityArr = [];
-
 var today = new Date();
 var date = (today.getMonth()+1) + "/" + today.getDate() + "/" + today.getFullYear();
 var forecastDates = [
@@ -21,19 +17,18 @@ var forecastDates = [
     (today.getMonth()+1) + "/" + (today.getDate()+5) + "/" + today.getFullYear(),
 ];
 
-var unixTime = Math.floor(Date.now() / 1000);
-var timeArray = [
-    (unixTime + 86400),
-    (unixTime + 172800),
-    (unixTime + 259200),
-    (unixTime + 345600),
-    (unixTime + 432000),
-];    
+// var unixTime = Math.floor(Date.now() / 1000);
+// var timeArray = [
+//     (unixTime + 86400),
+//     (unixTime + 172800),
+//     (unixTime + 259200),
+//     (unixTime + 345600),
+//     (unixTime + 432000),
+// ];
 
 var forecastWeatherData = function(weatherData) {
     for (i = 1; i < 6; i++) {
-        document.getElementById("forecast-date-" + [i]).textContent = forecastDates[index];
-        index++;
+        document.getElementById("forecast-date-" + [i]).textContent = forecastDates[(i -1)];
 
         var currentIcon = weatherData.daily[i].weather[0].icon;
         document.getElementById("forecast-icon-" + [i]).setAttribute("src", "https://openweathermap.org/img/wn/" + currentIcon + "@2x.png");
@@ -88,15 +83,14 @@ var getAllWeatherData = function(lat, lon, city) {
         if (response.ok) {
             response.json().then(function(data) {
                 currentWeatherData(data, city);
-                forecastWeatherData(data)
+                forecastWeatherData(data);
                 mainContainerEl.classList.add("flex-end-main");
-                allWeatherEl.classList.add("show-all-weather")
+                allWeatherEl.classList.add("show-all-weather");
             })
         } else {
-            alert("Something went wrong. Try again.")
+            alert("Something went wrong. Try again.");
         }
     });
-    index = 0;
 };
 
 var getCityGeo = function(city) {
@@ -226,7 +220,6 @@ var searchFormHandler = function(event) {
 };
 
 loadCityHistory();
-
 searchFormEl.addEventListener("submit", searchFormHandler);
 historyFormEl.addEventListener("click", historySearch);
 deleteBtnEl.addEventListener("click", deleteBtn);
