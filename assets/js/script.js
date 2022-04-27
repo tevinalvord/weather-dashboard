@@ -88,9 +88,13 @@ var getAllWeatherData = function(lat, lon, city) {
                 allWeatherEl.classList.add("show-all-weather");
             })
         } else {
-            alert("Something went wrong. Try again.");
+            alert("Error: City latitude and longitude could not be found");
         }
-    });
+    })
+
+    .catch(function(error) {
+        alert("Unable to connect to the service that provides weather data")
+    })
 };
 
 var getCityGeo = function(city) {
@@ -104,9 +108,13 @@ var getCityGeo = function(city) {
                 getAllWeatherData(lat, lon, city);
             })
         } else {
-            alert("Something went wrong. Try again.");
+            alert("Error: City could not be found");
         }
-    });
+    })
+
+    .catch(function(error) {
+        alert("Unable to connect to the service that provides weather data")
+    })
 };
 
 var createDeleteBtn = function() {
