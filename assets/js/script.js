@@ -5,7 +5,9 @@ var cityInputEl = document.querySelector("#search-city");
 var currentWeatherEl = document.querySelector("#current-weather");
 var forecastWeatherEl = document.querySelector("#forecast-weather");
 var allSearchEl = document.querySelector("#all-search");
+var allWeatherEl = document.querySelector("#all-weather");
 var deleteBtnEl = document.querySelector("#delete-btn-div");
+var mainContainerEl = document.querySelector("#main-container");
 var index = 0;
 var cityArr = [];
 
@@ -28,13 +30,6 @@ var timeArray = [
     (unixTime + 432000),
 ];    
 
-// var fiveDayForecast = function() {
-//     var forecastTitleEl = document.createElement("h2");
-//     forecastTitleEl.textContent = "5-Day Forecast:";
-//     forecastTitleEl.classList = "forecast-title";
-//     forecastWeatherEl.appendChild(forecastTitleEl);
-// };
-
 var forecastWeatherData = function(weatherData) {
     var forecastTitleEl = document.createElement("h2");
     forecastTitleEl.textContent = "5-Day Forecast:";
@@ -45,7 +40,7 @@ var forecastWeatherData = function(weatherData) {
     forecastWeatherDataDiv.classList = "forecast-data-wrapper";
     forecastWeatherEl.appendChild(forecastWeatherDataDiv);
 
-    for (i = 0; i < timeArray.length; i++) {
+    for (i = 1; i < 6; i++) {
         var forecastWeatherDataEl = document.createElement("div");
         forecastWeatherDataEl.classList = "forecast-data-div";
 
@@ -55,26 +50,26 @@ var forecastWeatherData = function(weatherData) {
         forecastWeatherDataEl.appendChild(forecastWeatherDate);
         index++;
 
-        var currentIcon = weatherData.daily[(i + 1)].weather[0].icon;
+        var currentIcon = weatherData.daily[i].weather[0].icon;
         var currentIconEl = document.createElement("img");
         currentIconEl.classList = "forecast-icon";
         currentIconEl.setAttribute("src", "https://openweathermap.org/img/wn/" + currentIcon + "@2x.png");
         forecastWeatherDataEl.appendChild(currentIconEl);
 
         var cityTemp = document.createElement("p");
-        var currentTemp = weatherData.daily[(i + 1)].temp.day;
+        var currentTemp = weatherData.daily[i].temp.day;
         cityTemp.textContent = "Temp: " + currentTemp + " °F";
         cityTemp.classList = "forecast-weather-info";
         forecastWeatherDataEl.appendChild(cityTemp);
 
         var cityWind = document.createElement("p");
-        var currentWind = weatherData.daily[(i + 1)].wind_speed;
+        var currentWind = weatherData.daily[i].wind_speed;
         cityWind.textContent = "Wind: " + currentWind + " MPH";
         cityWind.classList = "forecast-weather-info";
         forecastWeatherDataEl.appendChild(cityWind);
 
         var cityHumidity = document.createElement("p");
-        var currentHumidity = weatherData.daily[(i + 1)].humidity;
+        var currentHumidity = weatherData.daily[i].humidity;
         cityHumidity.textContent = "Humidity: " + currentHumidity + " %";
         cityHumidity.classList = "forecast-weather-info";
         forecastWeatherDataEl.appendChild(cityHumidity);
@@ -156,21 +151,6 @@ var getAllWeatherData = function(lat, lon, city) {
             alert("Something went wrong. Try again.")
         }
     });
-
-    // for (i = 0; i < timeArray.length; i++) {
-    //     var apiUrlForecast = "https://api.openweathermap.org/data/2.5/onecall/timemachine?lat=" + lat + "&lon=" + lon + "&dt=" + timeArray[i] + "&units=imperial&appid=3bc1242a5c5f806c1f576e32c339b00b";
-    
-        
-    //     fetch(apiUrlForecast).then(function(response) {
-    //         if (response.ok) {
-    //             response.json().then(function(data) {
-    //                 forecastWeatherData(data, forecastWeatherDataDiv);
-    //             })
-    //         } else {
-    //             alert("Something went wrong. Try again")
-    //         }
-    //     });
-    // };
     index = 0;
 };
 
@@ -275,6 +255,9 @@ var cityHistory = function(city) {
 var historySearch = function(event) {
     event.preventDefault();
 
+    mainContainerEl.classList.add("flex-end-main");
+    allWeatherEl.classList.add("show-all-weather")
+
     var buttonClicked = event.target.getAttribute("button")
 
     if (buttonClicked) {
@@ -293,6 +276,9 @@ var addToCityArr = function(city) {
 
 var searchFormHandler = function(event) {
     event.preventDefault();
+
+    mainContainerEl.classList.add("flex-end-main");
+    allWeatherEl.classList.add("show-all-weather")
 
     var city = cityInputEl.value.toLowerCase().trim();
 

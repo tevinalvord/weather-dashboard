@@ -28,8 +28,12 @@ body {
 
 .main-container {
     display:flex;
-    justify-content: flex-end;
+    justify-content: center;
     flex-wrap: wrap;
+}
+
+.flex-end-main {
+    justify-content: flex-end;
 }
 
 .form-div {
@@ -148,6 +152,11 @@ body {
 .all-weather {
     width: 60%;
     margin-right: 10%;
+    display: none;
+}
+
+.show-all-weather {
+    display: block;
 }
 
 .all-search {
