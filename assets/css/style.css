@@ -32,10 +32,6 @@ body {
     flex-wrap: wrap;
 }
 
-.flex-end-main {
-    justify-content: flex-end;
-}
-
 .form-div {
     margin: 10px 0px;
     display: flex;
@@ -52,11 +48,6 @@ body {
     margin: 10px 0px;
     display: flex;
     justify-content: flex-end;
-}
-
-.search-history-border {
-    border-top: 2px solid #6f6f6f;
-    border-bottom: 2px solid #6f6f6f;
 }
 
 .search-title {
@@ -159,10 +150,6 @@ body {
     display: none;
 }
 
-.show-all-weather {
-    display: block;
-}
-
 .all-search {
     width: 300px;
 }
@@ -176,10 +163,6 @@ body {
 
 .weather-data-div {
     position: relative;
-}
-
-.current-weather-border {
-    border: 1px solid black;
 }
 
 .current-weather-info {

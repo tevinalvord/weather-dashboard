@@ -45,7 +45,7 @@ var forecastWeatherData = function(weatherData) {
 };
 
 var currentWeatherData = function(weatherData, city) {
-    currentWeatherEl.classList.add("current-weather-border")
+    currentWeatherEl.style.border = "1px solid black"
 
     var cityName = city;
     cityInputEl.value = "";
@@ -84,8 +84,8 @@ var getAllWeatherData = function(lat, lon, city) {
             response.json().then(function(data) {
                 currentWeatherData(data, city);
                 forecastWeatherData(data);
-                mainContainerEl.classList.add("flex-end-main");
-                allWeatherEl.classList.add("show-all-weather");
+                mainContainerEl.style.justifyContent = "flex-end";
+                allWeatherEl.style.display = "block";
             })
         } else {
             alert("Error: City latitude and longitude could not be found");
@@ -147,7 +147,8 @@ var loadCityHistory = function() {
     cityArr = JSON.parse(cityArr)
 
     for (e = 0; e < cityArr.length; e++) {
-        searchHistoryEl.classList.add("search-history-border");
+        searchHistoryEl.style.borderTop = "2px solid #6f6f6f"
+        searchHistoryEl.style.borderBottom = "2px solid #6f6f6f"
         var city = cityArr[e];
         
         var historyBtn = document.createElement("button")
@@ -172,7 +173,8 @@ var saveCityHistory = function() {
 };
 
 var cityHistory = function(city) {
-    searchHistoryEl.classList.add("search-history-border");
+    searchHistoryEl.style.borderTop = "2px solid #6f6f6f"
+    searchHistoryEl.style.borderBottom = "2px solid #6f6f6f"
 
     var historyBtn = document.createElement("button")
 
